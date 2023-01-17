@@ -27,5 +27,5 @@ jobs:
           privateKey: ${{ secrets.EC2_SSH_KEY }}
           command: |
             cd yentown
-            docker compose down
-            docker compose up
+            docker-compose down
+            docker-compose up -d
