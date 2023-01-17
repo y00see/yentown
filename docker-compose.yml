@@ -1,0 +1,38 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '8080:3000'
+    volumes:
+      - './frontend:/opt/app'
+    restart: always
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - '4040:5000'
+    volumes:
+      - './backend:/opt/app'
+    links:
+      - db
+    environment:
+      - PGHOST=db
+      - PGDATABASE=yentown
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+    restart: always
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=yentown
+    volumes:
+      - database_data:/var/lib/postgresql/data
+volumes:
+  database_data:
+    driver: local
