@@ -28,4 +28,4 @@ jobs:
           command: |
             cd yentown
             docker-compose down
-            docker-compose up
+            docker-compose up -d
