@@ -28,4 +28,4 @@ jobs:
           command: |
             cd yentown
             docker-compose down
-            docker-compose up --build --remove-orphans --force-recreate -d
+            docker-compose -f docker-compose.server.yml up --build --remove-orphans --force-recreate -d
