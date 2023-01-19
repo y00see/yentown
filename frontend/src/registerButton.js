@@ -1,7 +1,9 @@
-const RegisterButton = () => {
+const RegisterButton = ({ to }) => {
     return(
         <>
-        <button className='Registerbutton'>Register</button>
+        <a href={`/${to}`}>
+            <button className='Registerbutton'>Register</button>
+        </a>
         </>
     );
 };
