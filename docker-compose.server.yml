@@ -4,16 +4,16 @@ services:
       context: ./frontend
     ports:
       - '8080:3000'
-    volumes:
-      - './frontend:/opt/app'
+        #    volumes:
+        # - './frontend:/opt/app'
     restart: always
   backend:
     build:
       context: ./backend
     ports:
       - '4040:5000'
-    volumes:
-      - './backend:/opt/app'
+        # volumes:
+        # - './backend:/opt/app'
     links:
       - db
     environment:
