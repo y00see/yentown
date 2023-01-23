@@ -17,26 +17,24 @@ const Register = () => {
       });
 
     const handleSubmit = async() => {
-        const formData = new FormData();
-        formData.append("email", formValue.email)
-        formData.append("username", formValue.account_name)
-        formData.append("password", formValue.password)
-        formData.append("confirm_password", formValue.confirm_password)
-        formData.append("city", formValue.city)
-        formData.append("country", formValue.country)
-        formData.append("zip_code", formValue.zip_code)
-        formData.append("address", formValue.address)
-        formData.append("first_name", formValue.first_name)
-        formData.append("last_name", formValue.last_name)
-
         try {
+            console.log(formValue.email);
             // make axios post request
-            const response = await axios({
-                method: "post",
-                url: "/api/auth/signup",
-                data: formData,
-                headers: { "Content-Type": "multipart/form-data" },
-            });
+            const response = await axios.post(
+                'http://localhost:4040/api/auth/signup',
+                {
+                    email: formValue.email,
+                    username: formValue.account_name,
+                    password: formValue.password,
+                    confirm_password: formValue.confirm_password,
+                    city: formValue.city,
+                    country: formValue.country,
+                    zip_code: formValue.zip_code,
+                    address: formValue.address,
+                    first_name: formValue.first_name,
+                    last_name: formValue.last_name
+                }
+            );
             console.log(response);
         } catch(error) {
         console.log(error)

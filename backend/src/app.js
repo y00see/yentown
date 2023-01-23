@@ -17,14 +17,16 @@ require('./routes/user.routes')(app);
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
