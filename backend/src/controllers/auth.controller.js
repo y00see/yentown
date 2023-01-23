@@ -9,7 +9,8 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.test = (req, res) => {
-    console.log(req);    
+    console.log(req.body);
+    return res.status(200).json({ message: "it works" });
 };
 
 exports.signup = (req, res) => {
