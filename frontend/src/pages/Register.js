@@ -64,7 +64,7 @@ const Register = () => {
                     <input type="text" placeholder="Last name" name="last_name" value={formValue.last_name} onChange={handleChange}></input>
                 </div>
                 <div>
-                    <select name = "dropdown" value={this.state.value} onChange={handleChange}>
+                    <select name = "country" onChange={handleChange}>
                         <option value = "Austria" selected>Austria</option>
                         <option value = "Belgium" >Belgium</option>
                         <option value = "Bulgaria" >Bulgaria</option>
