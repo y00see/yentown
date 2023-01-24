@@ -27,5 +27,7 @@ jobs:
           privateKey: ${{ secrets.EC2_SSH_KEY }}
           command: |
             cd yentown
+            sed -i "s/placeholder/${{ secrets.PG_SECRET }}/g" docker-compose.server.yml
+            sed -i "s/placeholder/${{ secrets.JWT_SECRET }}/g" backend/src/config/auth.config.js
             docker-compose down
             docker-compose -f docker-compose.server.yml up --build --remove-orphans --force-recreate -d
