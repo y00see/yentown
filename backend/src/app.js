@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 
 require('dotenv').config();
 
-const middlewares = require('./middleware/middlewares');
+const middlewares = require('./middlewares/middlewares');
 const api = require('./api');
 
 const app = express();

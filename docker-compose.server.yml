@@ -20,7 +20,7 @@ services:
       - PGHOST=db
       - PGDATABASE=yentown
       - PGUSER=postgres
-      - PGPASSWORD=postgres
+      - PGPASSWORD=placeholder
     restart: always
   db:
     image: postgres:latest
@@ -29,7 +29,7 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=placeholder
       - POSTGRES_DB=yentown
     volumes:
       - database_data:/var/lib/postgresql/data

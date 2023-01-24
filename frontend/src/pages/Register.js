@@ -16,30 +16,35 @@ const Register = () => {
         account_name: ''
       });
 
-    const handleSubmit = async() => {
-        try {
-            console.log(formValue.email);
-            // make axios post request
-            const response = await axios.post(
-                'http://localhost:4040/api/auth/signup',
-                {
-                    email: formValue.email,
-                    username: formValue.account_name,
-                    password: formValue.password,
-                    confirm_password: formValue.confirm_password,
-                    city: formValue.city,
-                    country: formValue.country,
-                    zip_code: formValue.zip_code,
-                    address: formValue.address,
-                    first_name: formValue.first_name,
-                    last_name: formValue.last_name
-                }
-            );
-            console.log(response);
-        } catch(error) {
-        console.log(error)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const post = async()  => {
+            try {
+                console.log(formValue.email);
+                // make axios post request
+                const response = await axios.post(
+                    'http://localhost:4040/api/auth/signup',
+                    {
+                        email: formValue.email,
+                        username: formValue.account_name,
+                        password: formValue.password,
+                        confirm_password: formValue.confirm_password,
+                        city: formValue.city,
+                        country: formValue.country,
+                        zip_code: formValue.zip_code,
+                        address: formValue.address,
+                        first_name: formValue.first_name,
+                        last_name: formValue.last_name
+                    }
+                );
+                console.log(response);
+            } catch(error) {
+            console.log(error)
+            }
         }
+        post();
     }
+
     const handleChange = (event) => {
         setformValue({
           ...formValue,
@@ -59,34 +64,34 @@ const Register = () => {
                     <input type="text" placeholder="Last name" name="last_name" value={formValue.last_name} onChange={handleChange}></input>
                 </div>
                 <div>
-                    <select name = "dropdown" onChange={handleChange}>
+                    <select name = "dropdown" value={this.state.value} onChange={handleChange}>
                         <option value = "Austria" selected>Austria</option>
-                        <option value = "Belgium">Belgium</option>
-                        <option value = "Bulgaria">Bulgaria</option>
-                        <option value = "Croatia">Croatia</option>
-                        <option value = "Cyprus">Cyprus</option>
-                        <option value = "Czech Republic">Czech Republic</option>
-                        <option value = "Denmark">Denmark</option>
-                        <option value = "Estonia">Estonia</option>
-                        <option value = "Finland">Finland</option>
-                        <option value = "France">France</option>
-                        <option value = "Germany">Germany</option>
-                        <option value = "Greece">Greece</option>
-                        <option value = "Hungary">Hungary</option>
-                        <option value = "Ireland">Ireland</option>
-                        <option value = "Italy">Italy</option>
-                        <option value = "Latvia">Latvia</option>
-                        <option value = "Lithuania">Lithuania</option>
-                        <option value = "Luxembourg">Luxembourg</option>
-                        <option value = "Malta">Malta</option>
-                        <option value = "Netherlands">Netherlands</option>
-                        <option value = "Poland">Poland</option>
-                        <option value = "Portugal">Portugal</option>
-                        <option value = "Romania">Romania</option>
-                        <option value = "Slovakia">Slovakia</option>
-                        <option value = "Slovenia">Slovenia</option>
-                        <option value = "Spain">Spain</option>
-                        <option value = "Sweden">Sweden</option>
+                        <option value = "Belgium" >Belgium</option>
+                        <option value = "Bulgaria" >Bulgaria</option>
+                        <option value = "Croatia" >Croatia</option>
+                        <option value = "Cyprus" >Cyprus</option>
+                        <option value = "Czech Republic" >Czech Republic</option>
+                        <option value = "Denmark" >Denmark</option>
+                        <option value = "Estonia" >Estonia</option>
+                        <option value = "Finland" >Finland</option>
+                        <option value = "France" >France</option>
+                        <option value = "Germany" >Germany</option>
+                        <option value = "Greece" >Greece</option>
+                        <option value = "Hungary" >Hungary</option>
+                        <option value = "Ireland" >Ireland</option>
+                        <option value = "Italy" >Italy</option>
+                        <option value = "Latvia" >Latvia</option>
+                        <option value = "Lithuania" >Lithuania</option>
+                        <option value = "Luxembourg" >Luxembourg</option>
+                        <option value = "Malta" >Malta</option>
+                        <option value = "Netherlands" >Netherlands</option>
+                        <option value = "Poland" >Poland</option>
+                        <option value = "Portugal" >Portugal</option>
+                        <option value = "Romania" >Romania</option>
+                        <option value = "Slovakia" >Slovakia</option>
+                        <option value = "Slovenia" >Slovenia</option>
+                        <option value = "Spain" >Spain</option>
+                        <option value = "Sweden" >Sweden</option>
                     </select>
                 </div>
                 <div>
