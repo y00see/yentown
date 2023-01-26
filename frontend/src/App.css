@@ -1,4 +1,4 @@
-.Registerbutton {
+.Status {
     background-color: black;
     border: none;
     color: white;
@@ -18,4 +18,23 @@
     display: inline-block;
     font-size: 16px;
   }
-  
+.Registerbutton {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+.Logoutbutton {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
