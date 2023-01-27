@@ -31,8 +31,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=placeholder
       - POSTGRES_DB=yentown
-    volumes:
-      - database_data:/var/lib/postgresql/data
-volumes:
-  database_data:
-    driver: local
+    #volumes:
+   #   - database_data:/var/lib/postgresql/data
+#volumes:
+  #database_data:
+   # driver: local
