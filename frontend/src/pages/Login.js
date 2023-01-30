@@ -1,14 +1,16 @@
 import axios from 'axios';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     
-    const navigate = useNavigate();
     const [formValue, setformValue] = React.useState({
         username: '',
         password: ''
       });
+
+    const [responseValue, setresponseValue] = React.useState({
+        ticker: ''
+    })
 
     const handleChange = (event) => {
         setformValue({
@@ -28,8 +30,10 @@ const Login = () => {
         if (response.data.accessToken) 
         {
             localStorage.setItem("user", JSON.stringify(response.data));
-        }})
-        navigate('/');
+            setresponseValue({ticker: "Succesfully logged in"})
+        }}, error =>
+            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
+        )
     }
 
     return (
@@ -46,6 +50,9 @@ const Login = () => {
                         <input type="password" name="password" value={formValue.password} onChange={handleChange}></input>
                     </div>
                     <button type="submit">Login</button>
+                    <div>
+                        {responseValue.ticker}
+                    </div>
                 </form>
             </div>
         </>

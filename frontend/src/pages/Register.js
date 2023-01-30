@@ -1,11 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
 
 const Register = () => {
-    const navigate = useNavigate();
     const [formValue, setformValue] = React.useState({
         email: '',
         password: '',
@@ -18,6 +14,10 @@ const Register = () => {
         last_name: '',
         account_name: ''
       });
+
+    const [responseValue, setresponseValue] = React.useState({
+        ticker: ''
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,12 +41,13 @@ const Register = () => {
                     }
                 );
                 console.log(response);
+                setresponseValue({ticker: JSON.stringify(response.response.data.message)})
             } catch(error) {
             console.log(error)
+            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
             }
         }
         post();
-        navigate('/');
     }
 
     const handleChange = (event) => {
@@ -121,6 +122,9 @@ const Register = () => {
                     <input type="password" placeholder="Confirm password" name="confirm_password" value={formValue.confirm_password} onChange={handleChange}></input>
                 </div>
                 <button type="submit">Register Now</button>
+                <div>
+                    {responseValue.ticker}
+                </div>
             </form>
         </div>
     )
