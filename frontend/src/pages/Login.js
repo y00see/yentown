@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-const Login = () => {
+const Login = props => {
     
     const [formValue, setformValue] = React.useState({
         username: '',
@@ -34,6 +34,7 @@ const Login = () => {
         }}, error =>
             setresponseValue({ticker: JSON.stringify(error.response.data.message)})
         )
+        props.setuserValue(JSON.parse(localStorage.getItem('user')));
     }
 
     return (

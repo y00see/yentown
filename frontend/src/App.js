@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, 
   Route } from "react-router-dom";
+import React from 'react';
 
 import RegisterButton from './pages/registerButton';
 import LoginButton from './pages/loginButton';
@@ -10,16 +11,16 @@ import Login from './pages/Login';
 
 
 const App = () => {
-  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const [userValue, setuserValue] = React.useState(null);
   return (
     <Router>
-      {currentUser ? (
+      {userValue ? (
         <>
         <div className="btn">
-            Logged in as {currentUser.username}
+            Logged in as {userValue.username}
         </div>
         <div className='btn'>
-            <LogoutButton to="/"/>
+            <LogoutButton to="/" userValue={userValue} setuserValue={setuserValue}/>
         </div>
         </>
       ) : (
@@ -35,7 +36,7 @@ const App = () => {
       <Routes>
         <Route path="/" />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login userValue={userValue} setuserValue={setuserValue} />} />
       </Routes>
     </Router>
   );

@@ -1,12 +1,11 @@
-const LogoutButton = () => {
+const LogoutButton = props => {
     const handleClick = (e) => {
         localStorage.removeItem("user");
+        props.setuserValue(JSON.parse(localStorage.getItem('user')));
     }
     return(
         <>
-        <a href="/">
-            <button className='Logoutbutton' onClick={handleClick}>Logout</button>
-        </a>
+        <button className='Logoutbutton' onClick={handleClick}>Logout</button>
         </>
     );
 };
