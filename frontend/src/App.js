@@ -19,18 +19,12 @@ const App = () => {
         <div className="btn">
             Logged in as {userValue.username}
         </div>
-        <div className='btn'>
             <LogoutButton to="/" userValue={userValue} setuserValue={setuserValue}/>
-        </div>
         </>
       ) : (
         <>
-        <div className='btn'>
             <RegisterButton to="register"/>
-        </div>
-        <div className='btn'>
             <LoginButton to="login"/>
-        </div>
         </>
       )}
       <Routes>

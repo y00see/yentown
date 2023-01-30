@@ -5,7 +5,7 @@ const LogoutButton = props => {
     }
     return(
         <>
-        <button className='Logoutbutton' onClick={handleClick}>Logout</button>
+        <button className='btn' onClick={handleClick}>Logout</button>
         </>
     );
 };
