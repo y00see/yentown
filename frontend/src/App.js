@@ -15,19 +15,19 @@ const App = () => {
     <Router>
       {currentUser ? (
         <>
-        <div className="Status">
+        <div className="btn">
             Logged in as {currentUser.username}
         </div>
-        <div className='Logoutbutton'>
+        <div className='btn'>
             <LogoutButton to="/"/>
         </div>
         </>
       ) : (
         <>
-        <div className='Registerbutton'>
+        <div className='btn'>
             <RegisterButton to="register"/>
         </div>
-        <div className='Loginbutton'>
+        <div className='btn'>
             <LoginButton to="login"/>
         </div>
         </>

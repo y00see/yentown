@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    
+    const navigate = useNavigate();
     const [formValue, setformValue] = React.useState({
         username: '',
         password: ''
@@ -25,11 +28,13 @@ const Login = () => {
         if (response.data.accessToken) 
         {
             localStorage.setItem("user", JSON.stringify(response.data));
-        }})};
+        }})
+        navigate('/');
+    }
 
     return (
         <>
-            <div className="loginform">
+            <div className="section">
                 <h1>Login</h1>
                 <form onSubmit={handleSubmit}>
                     <h2>Username</h2>

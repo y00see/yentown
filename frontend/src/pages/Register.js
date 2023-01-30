@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Register = () => {
-
+    const navigate = useNavigate();
     const [formValue, setformValue] = React.useState({
         email: '',
         password: '',
@@ -43,6 +46,7 @@ const Register = () => {
             }
         }
         post();
+        navigate('/');
     }
 
     const handleChange = (event) => {
@@ -53,7 +57,7 @@ const Register = () => {
       }
 
     return (
-        <div className="registerform">
+        <div className="section">
             <h1>Register account</h1>
             <form onSubmit={handleSubmit}>
                 <h3>Personal information</h3>
