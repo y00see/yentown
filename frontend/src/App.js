@@ -13,7 +13,7 @@ import Profile from './pages/Profile';
 
 
 const App = () => {
-  const [userValue, setuserValue] = React.useState(null);
+  const [userValue, setuserValue] = React.useState(JSON.parse(localStorage.getItem('user')));
   return (
     <Router>
       {userValue ? (
