@@ -41,10 +41,10 @@ const Register = () => {
                     }
                 );
                 console.log(response);
-                setresponseValue({ticker: JSON.stringify(response.response.data.message)})
+                setresponseValue({ticker: JSON.stringify(response.data.message)})
             } catch(error) {
             console.log(error)
-            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
+            setresponseValue({ticker: JSON.stringify(error.data.message)})
             }
         }
         post();
