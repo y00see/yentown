@@ -30,11 +30,11 @@ const Login = props => {
         if (response.data.accessToken) 
         {
             localStorage.setItem("user", JSON.stringify(response.data));
-            setresponseValue({ticker: "Succesfully logged in"})
+            setresponseValue({ticker: "Succesfully logged in"});
+            props.setuserValue(JSON.parse(localStorage.getItem('user')));
         }}, error =>
             setresponseValue({ticker: JSON.stringify(error.response.data.message)})
         )
-        props.setuserValue(JSON.parse(localStorage.getItem('user')));
     }
 
     return (

@@ -25,8 +25,7 @@ export default class Profile extends Component {
       if (this.state.redirect) {
         return <Navigate to={this.state.redirect} />
       }
-  
-      const { currentUser } = this.state;
+      
     return (
         <>
             <div className="main-content">
