@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/data.routes')(app);
 
 const db = require("./models");
 const Role = db.role;
