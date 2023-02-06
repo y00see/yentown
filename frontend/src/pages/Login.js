@@ -1,5 +1,6 @@
-import axios from 'axios';
 import React from 'react';
+import AuthService from '../services/auth.service'
+
 
 const Login = props => {
     
@@ -21,6 +22,16 @@ const Login = props => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        AuthService.login(formValue.username, formValue.password
+            ).then(response => {
+                if (response.accessToken) {
+                    setresponseValue({ticker: "Succesfully logged in"});
+                    props.setuserValue(JSON.parse(localStorage.getItem('user')));        
+                }
+            }, error => {
+                setresponseValue({ticker: JSON.stringify(error.response.data.message)});
+            });
+        /*
         axios.post('http://localhost:4040/api/auth/signin',
         {
             username: formValue.username,
@@ -35,6 +46,7 @@ const Login = props => {
         }}, error =>
             setresponseValue({ticker: JSON.stringify(error.response.data.message)})
         )
+        */
     }
 
     return (

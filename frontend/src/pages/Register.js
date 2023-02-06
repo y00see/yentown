@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React from 'react';
+import AuthService from '../services/auth.service'
 
 const Register = () => {
     const [formValue, setformValue] = React.useState({
@@ -21,6 +21,23 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        AuthService.register(
+            formValue.email,
+            formValue.account_name,
+            formValue.password,
+            formValue.confirm_password,
+            formValue.city,
+            formValue.country,
+            formValue.zip_code,
+            formValue.address,
+            formValue.first_name,
+            formValue.last_name
+        ).then(response => {
+            setresponseValue({ticker: JSON.stringify(response.data.message)});
+        }, error => {
+            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
+        });
+        /*
         const post = async()  => {
             try {
                 console.log(formValue.email);
@@ -48,6 +65,7 @@ const Register = () => {
             }
         }
         post();
+        */
     }
 
     const handleChange = (event) => {
