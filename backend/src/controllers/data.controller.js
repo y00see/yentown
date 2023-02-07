@@ -3,6 +3,7 @@ const config = require("../config/auth.config");
 const User = db.user;
 
 exports.load = (req, res) => {
+    console.log(req);
     User.findOne({
         where: {
           username: req.body.username
