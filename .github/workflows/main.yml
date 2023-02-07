@@ -30,5 +30,6 @@ jobs:
             sed -i "s/placeholder/${{ secrets.PG_SECRET }}/g" docker-compose.server.yml
             sed -i "s/placeholder/${{ secrets.JWT_SECRET }}/g" backend/src/config/auth.config.js
             sed -i "s/http:\/\/localhost:4040\//https:\/\/yentown.eu\//g" frontend/src/services/auth.service.js
+            sed -i "s/http:\/\/localhost:4040\//https:\/\/yentown.eu\//g" frontend/src/services/data.service.js
             docker-compose down
             docker-compose -f docker-compose.server.yml up --build --remove-orphans --force-recreate -d
