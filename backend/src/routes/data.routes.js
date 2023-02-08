@@ -7,4 +7,9 @@ module.exports = function(app) {
         [authJwt.verifyToken],
         controller.load
       );
+      app.post(
+        "/api/data/update",
+        [authJwt.verifyToken],
+        controller.update
+      );
 };

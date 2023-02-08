@@ -14,8 +14,14 @@ class DataService {
         })
     }
 
-    update() {
-
+    update(value, name, username) {
+        return axios.post(API_URL + "update", {
+            username: username,
+            name: name,
+            value: value
+        }, {
+            headers: authHeader()
+        })
     }
 }
 

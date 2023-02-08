@@ -3,7 +3,6 @@ const config = require("../config/auth.config");
 const User = db.user;
 
 exports.load = (req, res) => {
-    console.log(req);
     User.findOne({
         where: {
           username: req.body.username
@@ -23,4 +22,16 @@ exports.load = (req, res) => {
             }, error => {
                 res.status(500).send({ message: error.message });
             })
+}
+
+exports.update = (req, res) => {
+    const value = req.body.value;
+    const username = req.body.username;
+    const name = req.body.name;
+    console.log(value, username, name);
+    User.update({
+      [name]: value
+    }, {
+      where: {username: username}
+    })
 }
