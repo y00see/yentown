@@ -23,6 +23,31 @@ class DataService {
             headers: authHeader()
         })
     }
-}
 
+    order(
+        username,
+        date,
+        product_url,
+        product_weight,
+        product_x,
+        product_y,
+        product_z,
+        product_price,
+        shipping_cost) {
+            return axios.post(API_URL + "order", {
+                username: username,
+                date: date,
+                product_url: product_url,
+                product_weight: product_weight,
+                product_x: product_x,
+                product_y: product_y,
+                product_z: product_z,
+                product_price: product_price,
+                shipping_cost: shipping_cost
+            }, {
+                headers: authHeader()
+            })
+        }
+}
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new DataService();

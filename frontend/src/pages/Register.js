@@ -37,35 +37,6 @@ const Register = () => {
         }, error => {
             setresponseValue({ticker: JSON.stringify(error.response.data.message)})
         });
-        /*
-        const post = async()  => {
-            try {
-                console.log(formValue.email);
-                // make axios post request
-                const response = await axios.post(
-                    'http://localhost:4040/api/auth/signup',
-                    {
-                        email: formValue.email,
-                        username: formValue.account_name,
-                        password: formValue.password,
-                        confirm_password: formValue.confirm_password,
-                        city: formValue.city,
-                        country: formValue.country,
-                        zip_code: formValue.zip_code,
-                        address: formValue.address,
-                        first_name: formValue.first_name,
-                        last_name: formValue.last_name
-                    }
-                );
-                console.log(response);
-                setresponseValue({ticker: JSON.stringify(response.data.message)})
-            } catch(error) {
-            console.log(error)
-            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
-            }
-        }
-        post();
-        */
     }
 
     const handleChange = (event) => {

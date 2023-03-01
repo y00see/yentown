@@ -31,22 +31,6 @@ const Login = props => {
             }, error => {
                 setresponseValue({ticker: JSON.stringify(error.response.data.message)});
             });
-        /*
-        axios.post('http://localhost:4040/api/auth/signin',
-        {
-            username: formValue.username,
-            password: formValue.password
-        }
-        ).then(response => {
-        if (response.data.accessToken) 
-        {
-            localStorage.setItem("user", JSON.stringify(response.data));
-            setresponseValue({ticker: "Succesfully logged in"});
-            props.setuserValue(JSON.parse(localStorage.getItem('user')));
-        }}, error =>
-            setresponseValue({ticker: JSON.stringify(error.response.data.message)})
-        )
-        */
     }
 
     return (

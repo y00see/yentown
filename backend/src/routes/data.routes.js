@@ -6,10 +6,20 @@ module.exports = function(app) {
         "/api/data/get",
         [authJwt.verifyToken],
         controller.load
-      );
-      app.post(
+    );
+    app.post(
         "/api/data/update",
         [authJwt.verifyToken],
         controller.update
-      );
+    );
+    app.post(
+        "/api/data/order",
+        [authJwt.verifyToken],
+        controller.order
+    );
+    app.post(
+      "/api/data/getorders",
+      [authJwt.verifyToken],
+      controller.getorders
+    );
 };
