@@ -19,7 +19,8 @@ export default class Orders extends Component {
         product_z: "",
         product_price: "",
         shipping_cost: "",
-        ticker: ""
+        ticker: "",
+        orders: []
       };
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
@@ -30,7 +31,12 @@ export default class Orders extends Component {
   
       if (!currentUser) this.setState({ redirect: "/" });
       this.setState({ currentUser: currentUser, userReady: true })
-    }
+      DataService.getOrders(currentUser.username).then(response => {
+        this.setState({orders: response.data.orders});
+    }, error => {
+        this.setState({ticker: JSON.stringify(error)});
+    });
+      };
 
     handleChange = (event) => {
       this.setState({
@@ -40,22 +46,20 @@ export default class Orders extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      console.log(AuthService.getCurrentUser());
-      console.log(this.product_url);
       DataService.order(
-        AuthService.getCurrentUser().username,
+        this.state.currentUser.username,
         new Date(),
-        this.product_url,
-        this.product_weight,
-        this.product_x,
-        this.product_y,
-        this.product_z,
-        this.product_price,
-        this.shipping_cost
+        this.state.product_url,
+        this.state.product_weight,
+        this.state.product_x,
+        this.state.product_y,
+        this.state.product_z,
+        this.state.product_price,
+        this.state.shipping_cost
       ).then(response => {
-        this.setState({ticker: JSON.stringify(response.data.message)});
+        this.setState({ticker: JSON.stringify(response)});
     }, error => {
-        this.setState({ticker: JSON.stringify(error.response.data.message)});
+        this.setState({ticker: JSON.stringify(error)});
     });
     }
   
@@ -69,30 +73,30 @@ export default class Orders extends Component {
             <div className="main-content">
                <h1>Orders</h1>
                <h2>Current orders</h2>
-               <Table />
+               <Table orders={this.state.orders} />
                <h2>Create order</h2>
-               {this.ticker}
+               {this.state.ticker}
                <form onSubmit={this.handleSubmit}>
                 <div>
-               <input type="text" placeholder="URL for product" name="product_url" value={this.product_url} onChange={this.handleChange}></input>
+               <input type="text" placeholder="URL for product" name="product_url" value={this.product_url} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product weight in grams" name="product_weight" value={this.product_weight} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Product weight in grams" name="product_weight" value={this.product_weight} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product length in millimeters" name="product_x" value={this.product_x} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Product length in millimeters" name="product_x" value={this.product_x} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product height in millimiters" name="product_y" value={this.product_y} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Product height in millimiters" name="product_y" value={this.product_y} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product depth in millimiters" name="product_z" value={this.product_z} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Product depth in millimiters" name="product_z" value={this.product_z} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product price (Yen)" name="product_price" value={this.product_price} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Product price (Yen)" name="product_price" value={this.product_price} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Shipping cost in Japan" name="shipping_cost" value={this.shipping_cost} onChange={this.handleChange}></input>
+               <input type="number" placeholder="Shipping cost in Japan" name="shipping_cost" value={this.shipping_cost} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <button type="submit">Create order</button>
                </form>

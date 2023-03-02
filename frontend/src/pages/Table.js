@@ -2,35 +2,39 @@ import React from 'react';
 import { useTable } from "react-table";
 
 const Table = props => {
-
+    console.log(props.orders);
     const data = React.useMemo(
-        () => [
-          {
-            col1: 'Hello',
-            col2: 'World',
-          },
-          {
-            col1: 'react-table',
-            col2: 'rocks',
-          },
-          {
-            col1: 'whatever',
-            col2: 'you want',
-          },
-        ],
-        []
+        () => props.orders,
+        [props.orders]
       )
-    
+
+    console.log(data);  
     const columns = React.useMemo(
         () => [
           {
-            Header: 'Column 1',
-            accessor: 'col1', // accessor is the "key" in the data
+            Header: 'Order ID',
+            accessor: 'id', // accessor is the "key" in the data
           },
           {
-            Header: 'Column 2',
-            accessor: 'col2',
+            Header: 'Created at',
+            accessor: 'datetime',
           },
+          {
+            Header: 'Product URL',
+            accessor: 'product_url',
+          },
+          {
+            Header: 'Product price',
+            accessor: 'product_price'
+          },
+          {
+            Header: 'Shipping cost',
+            accessor: 'shipping_cost'
+          },
+          {
+            Header: 'Grouporder ID',
+            accessor: 'grouporder_id'
+          }
         ],
         []
       )
