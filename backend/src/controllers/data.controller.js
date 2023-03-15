@@ -1,6 +1,8 @@
 const db = require("../models");
 const User = db.user;
 const Order = db.order;
+const Gorder = db.grouporder;
+const binPacker = require("../3dbinpacking/packer");
 
 exports.load = (req, res) => {
     User.findOne({
@@ -52,6 +54,12 @@ exports.order = async (req, res) => {
       product_z: req.body.product_z,
       product_price: req.body.product_price,
       shipping_cost: req.body.shipping_cost
+    }).then(order =>{
+      res.status(200).send({
+        message: "Order created"
+      });
+    }, error => {
+        res.status(500).send({ message: error.message });
     })
   }
     exports.getorders = async (req, res) => {
@@ -67,8 +75,6 @@ exports.order = async (req, res) => {
           }
         })
           .then(orders => {
-            console.log(orders);
-            console.log(orders[0].id);
             res.status(200).json({
               orders: orders
             })
@@ -76,3 +82,50 @@ exports.order = async (req, res) => {
                   res.status(500).send({ message: error.message });
               })
   }
+  
+  exports.grouporder = async (req, res) => {
+    const groupOrderEntries = await Gorder.findAll();
+    let groupOrderFound = false;
+    const orderEntry = await Order.findOne({
+      where: {
+        id: req.body.order_id
+      }
+    });
+
+    for (let i = 0; i < groupOrderEntries.length; i++) {
+        const groupOrder = groupOrderEntries[i];
+    
+        // Check if the order fits into the group order using 3D bin packing
+        const currentOrders = await Order.findAll({
+          where: {
+            grouporder_id : groupOrder.id
+          }
+        });
+
+        const doesFit = binPacker.binPacker(currentOrders, orderEntry);
+    
+        if (doesFit) {
+          // Update the order with the group order ID
+          Order.update({
+            grouporder_id: groupOrder.id
+          }, {
+            where: {id: orderEntry.id}
+          })         
+          groupOrderFound = true;
+          break;
+        }
+    }
+    
+    if (!groupOrderFound) {
+        Gorder.create({
+          datetime: new Date()
+        }).then(grouporder => {
+          Order.update({
+            grouporder_id: grouporder.id
+          }, {
+            where: {id: orderEntry.id}
+          })
+        })
+    }
+    
+    };

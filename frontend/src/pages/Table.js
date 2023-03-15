@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable } from "react-table";
+import DataService from "../services/data.service";
 
 const Table = props => {
     console.log(props.orders);
@@ -7,8 +8,12 @@ const Table = props => {
         () => props.orders,
         [props.orders]
       )
+    
+    const handleClick = (e, order_id) => {
+        e.preventDefault();
+        DataService.groupOrder(order_id);
+    }
 
-    console.log(data);  
     const columns = React.useMemo(
         () => [
           {
@@ -34,6 +39,19 @@ const Table = props => {
           {
             Header: 'Grouporder ID',
             accessor: 'grouporder_id'
+          },
+          {
+            Header: 'Join Grouporder',
+            Cell: ( original ) => (
+                !original.row.original.grouporder_id ? (
+                <button value="Join Grouporder" onClick={(e) => handleClick(e, original.row.original.id)}>
+                  Join Grouporder
+                </button>) : (
+                    <>
+                    Joined
+                    </>
+                )
+            )    
           }
         ],
         []

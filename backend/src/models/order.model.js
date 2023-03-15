@@ -37,6 +37,10 @@ module.exports = (sequelize, Sequelize) => {
           model: 'grouporders',
           key: 'id'
         }
+      },
+      ready: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     })
   

@@ -57,9 +57,9 @@ export default class Orders extends Component {
         this.state.product_price,
         this.state.shipping_cost
       ).then(response => {
-        this.setState({ticker: JSON.stringify(response)});
+        this.setState({ticker: JSON.stringify(response.data.message)});
     }, error => {
-        this.setState({ticker: JSON.stringify(error)});
+        this.setState({ticker: JSON.stringify(error.message)});
     });
     }
   
