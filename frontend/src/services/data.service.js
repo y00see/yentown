@@ -64,6 +64,15 @@ class DataService {
             headers: authHeader()
         })
     }
+/*
+    getGroupOrder(grouporder_id) {
+        return axios.post(API_URL + "getgrouporder", {
+            grouporder_id: grouporder_id
+        }, {
+            headers: authHeader()
+        })
+    }
+*/
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new DataService();

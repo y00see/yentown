@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       product_weight: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       product_x: {
         type: Sequelize.INTEGER
@@ -38,9 +38,8 @@ module.exports = (sequelize, Sequelize) => {
           key: 'id'
         }
       },
-      ready: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+      grouporder_members: {
+        type: Sequelize.INTEGER
       }
     })
   

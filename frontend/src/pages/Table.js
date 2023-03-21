@@ -8,7 +8,8 @@ const Table = props => {
         () => props.orders,
         [props.orders]
       )
-    
+
+
     const handleClick = (e, order_id) => {
         e.preventDefault();
         DataService.groupOrder(order_id);
@@ -29,11 +30,11 @@ const Table = props => {
             accessor: 'product_url',
           },
           {
-            Header: 'Product price',
+            Header: 'Product price (yen)',
             accessor: 'product_price'
           },
           {
-            Header: 'Shipping cost',
+            Header: 'Shipping cost (yen)',
             accessor: 'shipping_cost'
           },
           {
@@ -52,6 +53,26 @@ const Table = props => {
                     </>
                 )
             )    
+          },
+          {
+            Header: 'International shipping cost (eur)',
+            Cell: (original) => (
+                !original.row.original.grouporder_id ? (
+                    (24700*0.0071) + 10
+                ) : (
+                    (24700*0.0071)/Number(original.row.original.grouporder_members) + 10
+                )
+            )
+          },
+          {
+            Header: 'Total price (eur)',
+            Cell: (original) => (
+                !original.row.original.grouporder_id ? (
+                    (24700*0.0071) + 10 + (Number(original.row.original.product_price) * 0.0071) + (Number(original.row.original.shipping_cost) * 0.0071) + (Number(original.row.original.product_price) * 0.0071 * 0.04)
+                ) : (
+                    (24700*0.0071)/Number(original.row.original.grouporder_members) + 10 + (Number(original.row.original.product_price) * 0.0071) + (Number(original.row.original.shipping_cost) * 0.0071) + (Number(original.row.original.product_price) * 0.0071 * 0.04)
+                )
+            ) 
           }
         ],
         []

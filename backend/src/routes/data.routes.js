@@ -27,4 +27,11 @@ module.exports = function(app) {
       [authJwt.verifyToken],
       controller.grouporder
     );
+  /*
+    app.post(
+      "/api/data/getgrouporder",
+      [authJwt.verifyToken],
+      controller.getgrouporder
+    )
+  */
 };

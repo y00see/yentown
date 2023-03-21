@@ -32,10 +32,12 @@ export default class Orders extends Component {
       if (!currentUser) this.setState({ redirect: "/" });
       this.setState({ currentUser: currentUser, userReady: true })
       DataService.getOrders(currentUser.username).then(response => {
+        console.log(response);
         this.setState({orders: response.data.orders});
     }, error => {
         this.setState({ticker: JSON.stringify(error)});
     });
+    
       };
 
     handleChange = (event) => {
@@ -81,16 +83,16 @@ export default class Orders extends Component {
                <input type="text" placeholder="URL for product" name="product_url" value={this.product_url} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product weight in grams" name="product_weight" value={this.product_weight} onChange={(e) => this.handleChange(e)}></input>
+               <input type="number" placeholder="Product weight in kilograms" name="product_weight" step="0.01" value={this.product_weight} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product length in millimeters" name="product_x" value={this.product_x} onChange={(e) => this.handleChange(e)}></input>
+               <input type="number" placeholder="Product length in centimeters" name="product_x" value={this.product_x} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product height in millimiters" name="product_y" value={this.product_y} onChange={(e) => this.handleChange(e)}></input>
+               <input type="number" placeholder="Product height in centimeters" name="product_y" value={this.product_y} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
-               <input type="number" placeholder="Product depth in millimiters" name="product_z" value={this.product_z} onChange={(e) => this.handleChange(e)}></input>
+               <input type="number" placeholder="Product depth in centimeters" name="product_z" value={this.product_z} onChange={(e) => this.handleChange(e)}></input>
                </div>
                <div>
                <input type="number" placeholder="Product price (Yen)" name="product_price" value={this.product_price} onChange={(e) => this.handleChange(e)}></input>

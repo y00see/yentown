@@ -53,7 +53,7 @@ exports.order = async (req, res) => {
       product_y: req.body.product_y,
       product_z: req.body.product_z,
       product_price: req.body.product_price,
-      shipping_cost: req.body.shipping_cost
+      shipping_cost: req.body.shipping_cost,
     }).then(order =>{
       res.status(200).send({
         message: "Order created"
@@ -68,7 +68,6 @@ exports.order = async (req, res) => {
           username: req.body.username
         }
       });
-      console.log(userEntry);
       Order.findAll({
           where: {
             user_id: userEntry.id
@@ -82,7 +81,44 @@ exports.order = async (req, res) => {
                   res.status(500).send({ message: error.message });
               })
   }
+  /*
+  exports.getorders = async (req, res) => {
+    try {
+      const userEntry = await User.findOne({
+        where: {
+          username: req.body.username
+        }
+      });
   
+      const orders = await Order.findAll({
+        where: {
+          user_id: userEntry.id
+        }
+      });
+  
+      const orderIds = orders.map(order => order.id);
+  
+      const orderDetails = await Order.findAll({
+        where: {
+          id: orderIds
+        },
+        include: {
+          model: grouporders,
+          required: false,
+          where: {
+            id: Sequelize.col('Order.grouporder.id')
+          }
+        }
+      });
+  
+      res.status(200).json({
+        orders: orderDetails
+      });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+  */
   exports.grouporder = async (req, res) => {
     const groupOrderEntries = await Gorder.findAll();
     let groupOrderFound = false;
@@ -106,11 +142,18 @@ exports.order = async (req, res) => {
     
         if (doesFit) {
           // Update the order with the group order ID
-          Order.update({
-            grouporder_id: groupOrder.id
+          await Gorder.increment('members', { by: 1, where: { id: groupOrder.id }});
+          await Order.update({
+            grouporder_id: groupOrder.id,
+            grouporder_members: groupOrder.members + 1
           }, {
             where: {id: orderEntry.id}
-          })         
+          });
+          await Order.update({
+            grouporder_members: groupOrder.members + 1
+          }, {
+            where: {grouporder_id: groupOrder.id}
+          })
           groupOrderFound = true;
           break;
         }
@@ -118,10 +161,12 @@ exports.order = async (req, res) => {
     
     if (!groupOrderFound) {
         Gorder.create({
-          datetime: new Date()
+          datetime: new Date(),
+          members: 1
         }).then(grouporder => {
           Order.update({
-            grouporder_id: grouporder.id
+            grouporder_id: grouporder.id,
+            grouporder_members: 1
           }, {
             where: {id: orderEntry.id}
           })
@@ -129,3 +174,18 @@ exports.order = async (req, res) => {
     }
     
     };
+/*
+exports.getgrouporder = async (req, res) => {
+  Gorder.findOne({
+    where: {
+      id: res.body.grouporder_id
+    }
+  }).then(grouporder => {
+    res.status(200).send({
+      members: grouporder.members
+    });
+  }, error => {
+      res.status(500).send({ message: error.message });
+  })
+}
+*/
